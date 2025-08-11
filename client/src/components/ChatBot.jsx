@@ -4,6 +4,7 @@ import Message from './Message';
 import QuickActions from './QuickActions';
 import { IoSend, IoCodeSlash, IoLogoGithub, IoLogoLinkedin, IoMail } from 'react-icons/io5';
 import './ChatBot.css';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([
@@ -26,41 +27,41 @@ const ChatBot = () => {
   }, [messages]);
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+  if (!input.trim()) return;
 
-    const userMessage = {
-      text: input,
-      sender: 'user',
-      timestamp: new Date()
-    };
+  const userMessage = {
+    text: input,
+    sender: 'user',
+    timestamp: new Date()
+  };
 
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsTyping(true);
+  setMessages(prev => [...prev, userMessage]);
+  setInput('');
+  setIsTyping(true);
 
-    try {
-      const response = await axios.post('http://localhost:5001/api/chat/message', {
-        message: input
-      });
+  try {
+    const response = await axios.post(`${API_URL}/api/chat/message`, {
+      message: input
+    });
 
-      setTimeout(() => {
-        setMessages(prev => [...prev, {
-          text: response.data.response,
-          sender: 'bot',
-          timestamp: new Date()
-        }]);
-        setIsTyping(false);
-      }, 1000);
-    } catch (error) {
-      console.error('Error:', error);
+    setTimeout(() => {
       setMessages(prev => [...prev, {
-        text: "I'm having trouble connecting right now, but I'm still here! I'm a Software Engineer with experience in React, Node.js, and MongoDB. Feel free to reach out at ravindusdc@gmail.com!",
+        text: response.data.response,
         sender: 'bot',
         timestamp: new Date()
       }]);
       setIsTyping(false);
-    }
-  };
+    }, 1000);
+  } catch (error) {
+    console.error('Error:', error);
+    setMessages(prev => [...prev, {
+      text: "I'm having trouble connecting right now, but I'm still here! I'm a Software Engineer with experience in React, Node.js, and MongoDB. Feel free to reach out at ravindusdc@gmail.com!",
+      sender: 'bot',
+      timestamp: new Date()
+    }]);
+    setIsTyping(false);
+  }
+};
 
   const handleQuickAction = (message) => {
     setInput(message);

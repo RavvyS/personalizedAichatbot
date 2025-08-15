@@ -11,10 +11,7 @@ const quickResponses = {
   'project': `I've worked on several exciting projects including an Employee Management System with React and MongoDB, a Vehicle Service Management System with Java, and a Boat Safari Management System. Which one would you like to know more about?`,
   'skill': `I'm proficient in full-stack development with expertise in React, Next.js, Express.js, and databases like MongoDB and MySQL. I also have experience with cloud platforms like Vercel and tools like Docker.`,
   'contact': `You can reach me at ravindusdc@gmail.com or call +94 77 602 7643. Also feel free to connect on LinkedIn or check out my GitHub!`,
-  'experience': `I worked as a Banking Associate at National Development Bank from May 2022 to Jan 2023, where I gained valuable experience in financial systems and customer service.`,
-  'education': `I'm currently pursuing my BSc (Hons) in Information Technology at SLIIT (2023-2027). I completed my A/levels in Physical Science at Sri Dharmaloka College.`,
-  'certification': `I have several certifications including Oracle Cloud Infrastructure 2025 Certified Foundations Associate, Postman API Fundamentals Student Expert, and certificates in Python and SQL from HackerRank.`,
-  'available': `Yes! I'm available for full-time opportunities, freelance projects, and interesting collaborations. Feel free to reach out!`
+
 };
 
 router.post('/message', async (req, res) => {
